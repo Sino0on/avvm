@@ -12,7 +12,18 @@
 <div class="row p5">
   <div class="col-md-8">
   <div class="py-5">
+
     <div class="row">
+      <div class="row pb-4 mb-2 border-bottom">
+        <h1 class="col">
+            Мероприятия
+        </h1>
+        <h5 class="col" style="text-align: right;">
+            {% if user.is_superuser %}
+            <a class="btn btn-info text-white" href="{% url 'home:event_create' %}">Создать</a>
+            {% endif %}
+        </h5>
+    </div>
       <div class="col-lg-9 mx-auto">
 
       {% for event in events %}

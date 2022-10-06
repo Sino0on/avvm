@@ -140,6 +140,16 @@ class NewsCreateView(generic.CreateView):
             raise PermissionDenied()
         return super(NewsCreateView, self).dispatch(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        print(form)
+        das = form.save(commit=False)
+        das.user = request.user
+        print(form)
+        print(das)
+        das.save()
+        return das
+
 
 class NewsUpdateView(generic.UpdateView):
     model = News
@@ -205,10 +215,44 @@ class EventDetailView(generic.DetailView):
         return context
 
 
+class EventCreateView(generic.CreateView):
+    model = Events
+    form_class = EventCreateForm
+    template_name = 'event_create.html'
+    context_object_name = 'form'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(EventCreateView, self).get_context_data(**kwargs)
+        try:
+            context['pages'] = OtherPage.objects.filter(navbar=True)
+        except:
+            pass
+        return context
+
+    def get_success_url(self):
+        print(self.object.get_absolute_url())
+        return reverse('home:event_detail', kwargs={'pk': self.object.pk})
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            raise PermissionDenied()
+        return super(EventCreateView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        form = EventCreateForm(request.POST)
+        das = form.save(commit=False)
+        das.user = request.user
+        print(form)
+        print(das)
+        if das.is_valid():
+            das.save()
+        return das
+
+
 class EventUpdateView(generic.UpdateView):
     model = Events
     form_class = EventCreateForm
-    template_name = 'news_create.html'
+    template_name = 'event_create.html'
     context_object_name = 'form'
 
     def get_context_data(self, *, object_list=None, **kwargs):

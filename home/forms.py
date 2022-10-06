@@ -3,11 +3,27 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from .widget import *
+from django.utils.translation import gettext_lazy as _
+
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField
     year = forms.DateField
     image = forms.ImageField
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password",
+                                          'class': 'form-control'
+                                          }),
+    )
+    password2 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password",
+                                          'class': 'form-control'
+                                          }),
+    )
 
     class Meta:
         model = User
@@ -18,9 +34,8 @@ class UserRegisterForm(UserCreationForm):
             'profession': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
-            'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
-
+            'age': forms.DateInput(attrs={'type': 'date'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'})
         }
 
 
@@ -44,14 +59,18 @@ class NewsCreateForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),
             'preview': forms.TextInput(attrs={'class': 'form-control'}),
-            'image': forms.FileInput(),
-            'date': forms.DateField()
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'date': forms.DateField(),
+            'is_prior': forms.CheckboxInput(attrs={'class': 'form-check-input mt-0',
+                                                   'aria-label': 'Checkbox for following text input',
+                                                   'style': 'float: left;margin-left: 0;'
+                                                   })
         }
 
 
 class EventCreateForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorUploadingWidget)
-    start = forms.DateTimeField(widget=forms.DateTimeInput(format='%Y-%m-%d %H:%M'))
+    category = forms.Select(attrs={'class': 'form-select'})
 
     class Meta:
         model = Events
@@ -60,7 +79,9 @@ class EventCreateForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),
             'preview': forms.TextInput(attrs={'class': 'form-control'}),
-            'image': forms.FileInput(attrs={'class': 'form-label', 'for': 'formFile'}),
-            'date': forms.DateField(),
-            'start':  forms.TextInput(attrs={'class': 'vDateField'})
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'start': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }

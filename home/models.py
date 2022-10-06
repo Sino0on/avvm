@@ -38,7 +38,7 @@ class News(models.Model):
     preview = models.CharField(blank=True, null=True, default='Подробнее...', max_length=100, verbose_name='Превью')
     image = models.ImageField(upload_to='images/news/%Y/%m/%d/', verbose_name='Изображение')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавление')
-    user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Пользователь', blank=True, null=True)
     is_prior = models.BooleanField(verbose_name='Важная новость', default=False)
 
     def __str__(self):
@@ -112,7 +112,7 @@ class Events(models.Model):
     start = models.DateTimeField(verbose_name='Начало')
     date = models.DateTimeField(auto_now_add='True', verbose_name='Дата загрузки')
     category = models.ForeignKey(EventCategory, on_delete=models.CASCADE, verbose_name='Категорие')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', blank=True, null=True)
     end = models.DateTimeField(verbose_name='Окончание')
     rer = models.ManyToManyField(Partner, blank=True, verbose_name='Партнеры')
 
