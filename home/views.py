@@ -1,8 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic
 from .forms import *
 from django.contrib.auth import authenticate, login
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import HttpResponse
 
 
 class HomeListView(generic.ListView):
@@ -147,8 +150,11 @@ class NewsCreateView(generic.CreateView):
         das.user = request.user
         print(form)
         print(das)
-        das.save()
-        return das
+        try:
+            das.save()
+        except:
+            return HttpResponse('Error')
+        return HttpResponseRedirect(reverse_lazy('home:event_detail', args=[das.id]))
 
 
 class NewsUpdateView(generic.UpdateView):
@@ -239,14 +245,16 @@ class EventCreateView(generic.CreateView):
         return super(EventCreateView, self).dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        form = EventCreateForm(request.POST)
+        form = self.get_form()
         das = form.save(commit=False)
         das.user = request.user
         print(form)
         print(das)
-        if das.is_valid():
+        try:
             das.save()
-        return das
+        except:
+            return
+        return HttpResponseRedirect(reverse_lazy('home:event_detail', args=[das.id]))
 
 
 class EventUpdateView(generic.UpdateView):
