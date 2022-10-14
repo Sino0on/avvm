@@ -10,6 +10,7 @@ urlpatterns = [
     path('event_detail/<int:pk>', EventDetailView.as_view(), name='event_detail'),
     path('page_detail/<int:pk>', PageDetailView.as_view(), name='page_detail'),
     path('galery/', GaleryListView.as_view()),
+    path('image_create/', imagescreate, name='image_create'),
     path('register/', register, name='register'),
     path('login/', loginview, name='login'),
     path('logout/', auth_view.LogoutView.as_view(template_name='logout.html'), name='logout'),

@@ -51,4 +51,5 @@ admin.site.register(NewsImage)
 admin.site.register(Article)
 admin.site.register(ArticleFile)
 admin.site.register(Partner)
+admin.site.register(PageCatery)
 

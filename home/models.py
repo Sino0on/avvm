@@ -10,10 +10,12 @@ class User(AbstractUser):
     age = models.DateField(blank=True, null=True, verbose_name='Возраст')
     is_vrach = models.BooleanField(default=False, verbose_name='Врач')
     description = RichTextField(blank=True, default='Пусто', verbose_name='Описание')
-    image = models.ImageField(upload_to='images/avatars/', blank=True, null=True)
+    image = models.ImageField(upload_to='images/avatars/', blank=True, null=True, verbose_name='Аватар')
     profession = models.CharField(max_length=255, verbose_name='Профессия')
 
     def __str__(self):
+        if self.first_name == '':
+            return f'{self.username}'
         return f'{self.first_name} {self.last_name}'
 
     class Meta:
@@ -56,7 +58,7 @@ class News(models.Model):
 class NewsImage(models.Model):
     image = models.ImageField(upload_to='images/news/%Y/%m/%d/')
     date = models.DateTimeField(auto_now_add=True)
-    news = models.ForeignKey(News, on_delete=models.PROTECT)
+
 
 
 class Article(models.Model):
@@ -128,12 +130,23 @@ class Events(models.Model):
         ordering = ['-date']
 
 
+class PageCatery(models.Model):
+    title = models.CharField(max_length=123)
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Страница на сайте'
+        verbose_name_plural = 'Страницы на сайте'
+
+
 class OtherPage(models.Model):
     title = models.CharField(max_length=144, verbose_name='Название')
     description = RichTextField(verbose_name='Описание')
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
-    navbar = models.BooleanField(default=False, verbose_name='На главную страничку')
+    on_page = models.ForeignKey(PageCatery, on_delete=models.CASCADE, related_name='pagecategory', verbose_name='Категория страницы')
 
     def __str__(self):
         return f'{self.title}'

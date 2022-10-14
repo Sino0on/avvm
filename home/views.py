@@ -23,7 +23,7 @@ class HomeListView(generic.ListView):
         except:
             pass
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
         das = []
@@ -52,7 +52,7 @@ class NewsDetailView(generic.DetailView):
         except:
             pass
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
         context['loginform'] = LoginForm
@@ -66,13 +66,14 @@ class GaleryListView(generic.ListView):
     template_name = 'gallery.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(GaleryListView, self).get_context_data(**kwargs)
+        context = {'images': NewsImage.objects.all()}
+        print(context['images'])
         try:
             context['mention'] = Mention.objects.get(id=1)
         except:
             pass
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
         context['loginform'] = LoginForm
@@ -103,14 +104,11 @@ def register(request):  # функция регистрации
     else:  # если это запрос не пост
         form = UserRegisterForm()  # Присваивание форму
     context = {'form': form, 'loginform': LoginForm,
-               'pages': OtherPage.objects.filter(navbar=True)}  # контекст для передачи данных для шаблона
-    def get_context_data(self, **kwargs):
-        context = super(NewsUpdateView, self).get_context_data(**kwargs)
-        try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
-        except:
-            pass
-        return context
+               'pages': PageCatery.objects.all()}  # контекст для передачи данных для шаблона
+    try:
+        context['pages'] = PageCatery.objects.all()
+    except:
+        pass
     return render(request, 'register.html', context)
 
 
@@ -132,10 +130,7 @@ class NewsCreateView(generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(NewsCreateView, self).get_context_data(**kwargs)
-        try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
-        except:
-            pass
+        context['pages'] = PageCatery.objects.all()
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -166,7 +161,16 @@ class NewsUpdateView(generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super(NewsUpdateView, self).get_context_data(**kwargs)
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
+        except:
+            pass
+        try:
+            context['mention'] = Mention.objects.get(id=1)
+
+        except:
+            pass
+        try:
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
         return context
@@ -194,7 +198,7 @@ class EventsListView(generic.ListView):
         except:
             pass
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
         context['loginform'] = LoginForm
@@ -215,7 +219,7 @@ class EventDetailView(generic.DetailView):
             pass
         context['loginform'] = LoginForm
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
         return context
@@ -230,7 +234,16 @@ class EventCreateView(generic.CreateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(EventCreateView, self).get_context_data(**kwargs)
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
+        except:
+            pass
+        try:
+            context['mention'] = Mention.objects.get(id=1)
+
+        except:
+            pass
+        try:
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
         return context
@@ -254,7 +267,7 @@ class EventCreateView(generic.CreateView):
             das.save()
         except:
             return
-        return HttpResponseRedirect(reverse_lazy('home:event_detail', args=[das.id]))
+        return redirect('/')
 
 
 class EventUpdateView(generic.UpdateView):
@@ -266,9 +279,19 @@ class EventUpdateView(generic.UpdateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(EventUpdateView, self).get_context_data(**kwargs)
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
+        try:
+            context['mention'] = Mention.objects.get(id=1)
+
+        except:
+            pass
+        try:
+            context['pages'] = PageCatery.objects.all()
+        except:
+            pass
+        context['loginform'] = LoginForm
         return context
 
     def get_success_url(self):
@@ -294,7 +317,25 @@ class PageDetailView(generic.DetailView):
             pass
         context['loginform'] = LoginForm
         try:
-            context['pages'] = OtherPage.objects.filter(navbar=True)
+            context['pages'] = PageCatery.objects.all()
         except:
             pass
+
         return context
+
+
+def imagescreate(request):
+    if request.method == 'POST':
+        print(request.FILES)
+        files = request.FILES.getlist('files')
+        print('yes', files)
+        for i in files:
+            if str(i).split('.')[-1].lower() in 'pngjpegimgjpg':
+                b = NewsImage(image=i)
+                b.save()
+                print('saved')
+        return redirect('/')
+    else:
+        context = {'images': NewsImage.objects.all()}
+        print(context['images'])
+        return render(request, 'imagescreate.html', context=context)
