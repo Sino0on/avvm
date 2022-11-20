@@ -1,3 +1,4 @@
+
 <!doctype html>
 {% load static %}
 <html lang="en">
@@ -58,6 +59,34 @@
 .dropdown:hover .dropdown-content {display: block;}
 
 </style>
+
+<!--   Style for navbar     -->
+            <style>
+    .fontStyle2{font-family:manrope,sans-serif}
+    .fontStyle1{font-family:anton,sans-serif}
+    .compact{line-height:1.5em}
+    a.customNav{color:#fff;
+        text-decoration:none;
+        display:inline-block;
+        min-width:80px;text-align:center;
+        border-right:1px solid #ffffff;
+        padding:14px 18px}
+    a.active,a.customNav:hover{
+        background:rgba(255,255,255,.2)
+        !important;border-color:transparent}
+        @media screen and (min-width:797px){#bottomNavbar.collapse{display:block}}
+        @media screen and (max-width:796px){#bottomNavbar{padding:14px}
+        #bottomNavbar
+        a.customNav{
+            display:block !important;
+            border:none;background:rgba(0,0,0,.2);
+            margin-top:4px;margin-bottom:4px;
+            margin-left:-5px;
+            margin-right:-5px}
+        #removeFlex{
+            display:block!important;
+            text-align:center}
+        }</style>
 
     <style>
       a {
@@ -178,99 +207,174 @@
   </div>
 </nav>
 
-  <header>
-    <div class="px-3 py-2 text-bg-info">
-      <div class="container navbar-expand-lg">
-        <div class="d-flex flex-wrap align-items-start justify-content-center justify-content-lg-start">
-
-
-            <div class="nav col my-2  my-md-0 ">
-              <a href="/" class="ms-5 align-items-start my-2 my-lg-2 me-lg-auto text-white text-decoration-none">
-                <h5>Ассоциация Врачей по внутренней </h5>
-                <h5>медицине Кыргызской Республики</h5>
-              </a>
-            </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-</svg></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarText">
+<div class=bg-info>
+        <div class=container-fluid>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class=p-2>
+                    <a class=navbar-brand href=#>
+                    <img src="http://www.w3.org/2000/svg%22%20width=%22204%22%20height=%22152%22%3E%3C/svg%3E" height=90 alt ezimgfmt="rs rscb1 src ng ngcb1" class=ezlazyload data-ezsrc=https://htmljstemplates.com/static_files/images/logos/logo_5.png>
+                    </a>
+                </div>
+                <div class="p-2 text-end">
+                    <div class=" justify-content-end" id="navbarText">
             <ul class="nav col-12 col-lg-auto my-2 justify-content-end my-md-0 text-small">
-            <li>
-              <a href="/" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
-                Домой
-              </a>
-            </li>
-            <li>
-              <a href="/course/" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
-                Курсы
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
-                Врачи
-              </a>
-            </li>
-                {% if user.is_authenticated %}
-            <li>
-              <a href="{% url 'home:logout' %}?next=/" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                Выйти
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white" >
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                {{ user }}
-              </a>
-            </li>
-                {% else %}
-            <li>
-              <a href="/register/" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
-                Регистрация
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                Войти
-              </a>
-            </li>
-                {% endif %}
-          </ul>
+
+                    {% if user.is_authenticated %}
+                <li class="border-end border-start">
+                  <a href="{% url 'home:logout' %}?next=/" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+                    Выйти
+                  </a>
+                </li>
+                <li class="border-end border-start">
+                  <a href="#" class="nav-link text-white" >
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+                    {{ user }}
+                  </a>
+                </li>
+                    {% else %}
+                <li class="border-end border-start">
+                  <a href="/register/" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
+                    Регистрация
+                  </a>
+                </li>
+                <li class="border-end border-start">
+                  <a href="#" class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+                    Войти
+                  </a>
+                </li>
+                    {% endif %}
+            </ul>
           </div>
-          <div class="container border-top mt-3">
-            <div class="">
-
-              <ul class="nav d-flex justify-content-between">
-                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="#">Домой</a></li>
-                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="#news">Новости</a></li>
-                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="{% url 'home:events' %}">События</a></li>
-
-                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="/galery/">Галерея</a></li>
-                  {% for page in pages %}
-                  <li><div class="dropdown">
-                  <a class="p-2 nav-link text-white border-start border-end px-3">{{ page.title }}</a>
-                  <div class="dropdown-content">
-                      {% for i in page.pagecategory.all %}
-                    <a href="{% url 'home:page_detail' i.pk %}">{{ i.title }}</a>
-                      {% endfor %}
-                  </div></li>
-                      {% endfor %}
-
-              </ul>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+<div class=" fontStyle2" style="background-color: #0fa9c9">
+        <button type=button data-bs-toggle=collapse data-bs-target=#bottomNavbar class="btn btn-info text-white w-100 d-lg-none d-md-none d-sm-block d-xs-block rounded-0 p-2">
+            <i class="fas fa-bars me-2"></i> Menu
+        </button>
+        <div class="collapse navbar-collapse px-2" id=bottomNavbar>
+            <div class=container-fluid>
+                <div class="d-flex justify-content-between align-items-center" id=removeFlex>
+                    <div class=flex-grow-1>
+                        <a class="d-inline-block customNav" href="#">Домой</a>
+                        <a class="d-inline-block customNav" href="#news">Новости</a>
+                        <a class="d-inline-block customNav" href="{% url 'home:events' %}">События</a>
+                        <a class="d-inline-block customNav" href="/galery/">Галерея</a>
+                          {% for page in pages %}
+                          <div class="dropdown">
+                          <a class="d-inline-block customNav">{{ page.title }}</a>
+                          <div class="dropdown-content">
+                              {% for i in page.pagecategory.all %}
+                            <a href="{% url 'home:page_detail' i.pk %}">{{ i.title }}</a>
+                              {% endfor %}
+                          </div>
+                              {% endfor %}
+                            </div>
+                            <div class=m-3>
+                                <i class="fas fa-search text-white fs-6"></i>
+                            </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-  </header>
+<!--  <header>-->
+<!--    <div class="px-3 py-2 text-bg-info">-->
+<!--      <div class="container navbar-expand-lg">-->
+<!--        <div class="d-flex flex-wrap align-items-start justify-content-center justify-content-lg-start">-->
+
+
+<!--            <div class="nav col my-2  my-md-0 ">-->
+<!--              <a href="/" class="ms-5 align-items-start my-2 my-lg-2 me-lg-auto text-white text-decoration-none">-->
+<!--                <h5>Ассоциация Врачей по внутренней </h5>-->
+<!--                <h5>медицине Кыргызской Республики</h5>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">-->
+<!--  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>-->
+<!--</svg></span>-->
+<!--          </button>-->
+<!--          <div class="collapse navbar-collapse justify-content-end" id="navbarText">-->
+<!--            <ul class="nav col-12 col-lg-auto my-2 justify-content-end my-md-0 text-small">-->
+<!--                <li>-->
+<!--                  <a href="/" class="nav-link text-white">-->
+<!--                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>-->
+<!--                    Домой-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="/course/" class="nav-link text-white">-->
+<!--                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>-->
+<!--                    Курсы-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="#" class="nav-link text-white">-->
+<!--                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>-->
+<!--                    Врачи-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                    {% if user.is_authenticated %}-->
+<!--                <li>-->
+<!--                  <a href="{% url 'home:logout' %}?next=/" class="nav-link text-white">-->
+<!--                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>-->
+<!--                    Выйти-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="#" class="nav-link text-white" >-->
+<!--                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>-->
+<!--                    {{ user }}-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                    {% else %}-->
+<!--                <li>-->
+<!--                  <a href="/register/" class="nav-link text-white">-->
+<!--                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>-->
+<!--                    Регистрация-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="#" class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>-->
+<!--                    Войти-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                    {% endif %}-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="container border-top mt-3">-->
+<!--            <div class="">-->
+
+<!--              <ul class="nav d-flex justify-content-between">-->
+<!--                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="#">Домой</a></li>-->
+<!--                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="#news">Новости</a></li>-->
+<!--                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="{% url 'home:events' %}">События</a></li>-->
+
+<!--                <li><a class="p-2 nav-link text-white border-start border-end px-3" href="/galery/">Галерея</a></li>-->
+<!--                  {% for page in pages %}-->
+<!--                  <li><div class="dropdown">-->
+<!--                  <a class="p-2 nav-link text-white border-start border-end px-3">{{ page.title }}</a>-->
+<!--                  <div class="dropdown-content">-->
+<!--                      {% for i in page.pagecategory.all %}-->
+<!--                    <a href="{% url 'home:page_detail' i.pk %}">{{ i.title }}</a>-->
+<!--                      {% endfor %}-->
+<!--                  </div></li>-->
+<!--                      {% endfor %}-->
+
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </header>-->
 
 
 <!-- Modal -->

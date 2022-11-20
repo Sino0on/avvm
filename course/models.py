@@ -19,6 +19,7 @@ class CourseCategory(models.Model):
 class Course(models.Model):
     title = models.CharField(max_length=155, verbose_name='Название')
     description = RichTextField(verbose_name='Контент')
+    preview = models.CharField(max_length=123, verbose_name='Контент')
     date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='images/courses/', verbose_name='Изображение')
     teachers = models.ManyToManyField(User, related_name='teachers', verbose_name='Учиеля')
