@@ -188,24 +188,21 @@
 
 <!--</div>-->
 
-<nav class="navbar text-center">
-  <div class="container-fluid text-center">
-    <div class="container text-center">
-      <div class="row pt-3">
-        <div class="col col-lg-2"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-play-btn" viewBox="0 0 16 16">
-  <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
-  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
-</svg></div>
-        <div class="col-md-8">
-          <p>Конференция "Иса Ахунбаев проведет стрим" в прямом эфире </p>
-        </div>
-        <div class="col">
-          <a class="btn btn-outline-danger" href="stream.html">Смотреть...</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+<!--<nav class="navbar text-center">-->
+<!--  <div class="container-fluid text-center">-->
+<!--    <div class="container text-center">-->
+<!--      <div class="row pt-3">-->
+<!--        <div class="col col-lg-2"></div>-->
+<!--        <div class="col-md-8">-->
+<!--          <p>Конференция "Иса Ахунбаев проведет стрим" в прямом эфире </p>-->
+<!--        </div>-->
+<!--        <div class="col">-->
+<!--          <a class="btn btn-outline-danger" href="#">Смотреть...</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
 
 <div class=bg-info>
         <div class=container-fluid>
@@ -260,9 +257,10 @@
             <div class=container-fluid>
                 <div class="d-flex justify-content-between align-items-center" id=removeFlex>
                     <div class=flex-grow-1>
-                        <a class="d-inline-block customNav" href="#">Домой</a>
-                        <a class="d-inline-block customNav" href="#news">Новости</a>
+                        <a class="d-inline-block customNav" href="{% url 'home:home' %}">Домой</a>
+                        <a class="d-inline-block customNav" href="{% url 'home:home' %}#news">Новости</a>
                         <a class="d-inline-block customNav" href="{% url 'home:events' %}">События</a>
+                        <a class="d-inline-block customNav" href="{% url 'course:courses' %}">Курсы</a>
                         <a class="d-inline-block customNav" href="/galery/">Галерея</a>
                           {% for page in pages %}
                           <div class="dropdown">
@@ -281,7 +279,7 @@
             </div>
         </div>
     </div>
-
+</div>
 <!--  <header>-->
 <!--    <div class="px-3 py-2 text-bg-info">-->
 <!--      <div class="container navbar-expand-lg">-->

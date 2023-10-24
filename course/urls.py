@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import *
 
+app_name = 'course'
+
 urlpatterns = [
     path('', CourseListView.as_view(), name='courses'),
     path('detail/<int:pk>', CourseDetailView.as_view(), name='course_detail'),

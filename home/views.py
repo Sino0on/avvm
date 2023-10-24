@@ -24,9 +24,11 @@ class HomeListView(generic.ListView):
             pass
         try:
             context['pages'] = PageCatery.objects.all()
+
         except:
             pass
         das = []
+        context['news'] = News.objects.all()
         print(context['pages'])
         qwe = News.objects.filter(is_prior=True)
         for i in range(len(qwe)):
@@ -53,8 +55,10 @@ class NewsDetailView(generic.DetailView):
             pass
         try:
             context['pages'] = PageCatery.objects.all()
+
         except:
             pass
+        context['news'] = News.objects.all()
         context['loginform'] = LoginForm
         return context
 
@@ -74,9 +78,11 @@ class GaleryListView(generic.ListView):
             pass
         try:
             context['pages'] = PageCatery.objects.all()
+
         except:
             pass
         context['loginform'] = LoginForm
+        context['news'] = News.objects.all()
         return context
 
 
@@ -107,8 +113,10 @@ def register(request):  # функция регистрации
                'pages': PageCatery.objects.all()}  # контекст для передачи данных для шаблона
     try:
         context['pages'] = PageCatery.objects.all()
+
     except:
         pass
+    context['news'] = News.objects.all()
     return render(request, 'register.html', context)
 
 
@@ -131,6 +139,7 @@ class NewsCreateView(generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super(NewsCreateView, self).get_context_data(**kwargs)
         context['pages'] = PageCatery.objects.all()
+        context['news'] = News.objects.all()
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -149,7 +158,7 @@ class NewsCreateView(generic.CreateView):
             das.save()
         except:
             return HttpResponse('Error')
-        return HttpResponseRedirect(reverse_lazy('home:event_detail', args=[das.id]))
+        return HttpResponseRedirect(reverse_lazy('home:news_detail', args=[das.id]))
 
 
 class NewsUpdateView(generic.UpdateView):
@@ -160,8 +169,10 @@ class NewsUpdateView(generic.UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(NewsUpdateView, self).get_context_data(**kwargs)
+        context['news'] = News.objects.all()
         try:
             context['pages'] = PageCatery.objects.all()
+
         except:
             pass
         try:
@@ -193,8 +204,10 @@ class EventsListView(generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(EventsListView, self).get_context_data(**kwargs)
+        context['news'] = News.objects.all()
         try:
             context['mention'] = Mention.objects.get(id=1)
+
         except:
             pass
         try:
@@ -215,9 +228,11 @@ class EventDetailView(generic.DetailView):
         print(context)
         try:
             context['mention'] = Mention.objects.get(id=1)
+
         except:
             pass
         context['loginform'] = LoginForm
+        context['news'] = News.objects.all()
         try:
             context['pages'] = PageCatery.objects.all()
         except:
@@ -233,8 +248,10 @@ class EventCreateView(generic.CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(EventCreateView, self).get_context_data(**kwargs)
+        context['news'] = News.objects.all()
         try:
             context['pages'] = PageCatery.objects.all()
+
         except:
             pass
         try:
@@ -278,8 +295,10 @@ class EventUpdateView(generic.UpdateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(EventUpdateView, self).get_context_data(**kwargs)
+        context['news'] = News.objects.all()
         try:
             context['pages'] = PageCatery.objects.all()
+
         except:
             pass
         try:
@@ -311,8 +330,10 @@ class PageDetailView(generic.DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PageDetailView, self).get_context_data(**kwargs)
+        context['news'] = News.objects.all()
         try:
             context['mention'] = Mention.objects.get(id=1)
+
         except:
             pass
         context['loginform'] = LoginForm
@@ -339,3 +360,15 @@ def imagescreate(request):
         context = {'images': NewsImage.objects.all()}
         print(context['images'])
         return render(request, 'imagescreate.html', context=context)
+
+
+# def main_comment_create(request, pk):
+#     form = CommentForm(request.POST)
+#     das = form.save(commit=False)
+#     das.user_id = request.user.id
+#     das.course = Course.objects.get(id=pk)
+#     das.parent = None
+#     print(das.parent)
+#     print(123)
+#     das.save()
+#     return redirect(f'/course/detail/{das.course.id}')

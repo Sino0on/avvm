@@ -27,6 +27,7 @@ class CourseListView(generic.ListView):
         except:
             pass
         context['loginform'] = LoginForm
+        context['news'] = News.objects.all()
         return context
 
 
@@ -38,6 +39,7 @@ class CourseDetailView(generic.DetailView):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         context['comments'] = CourseComment.objects.filter(course=self.object.id, parent__isnull=True)
         context['comment_form'] = CommentForm()
+        context['news'] = News.objects.all()
         context['loginform'] = LoginForm
         try:
             context['mention'] = Mention.objects.get(id=1)
@@ -65,6 +67,7 @@ class TaskDetailView(generic.DetailView):
             pass
         context['comments'] = TaskComment.objects.filter(task=self.object.id, parent__isnull=True)
         context['comment_form'] = CommentTaskForm()
+        context['news'] = News.objects.all()
         context['loginform'] = LoginForm
         tasks = Task.objects.filter(chapter=context['task'].chapter.id)
         chapters = Chapter.objects.filter(course=context['task'].chapter.course.id)
